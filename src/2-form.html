@@ -1,40 +1,31 @@
-const formEl = document.querySelector('.feedback-form');
-const STORAGE_KEY = 'feedback-form-state';
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <section>
+        <a class="back" href="./index.html">Go back</a>
+        <h1>Form</h1>
+        <form class="feedback-form" autocomplete="off">
+          <label>
+            Email
+            <input type="email" name="email" autofocus />
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="8"></textarea>
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
 
-let formData = {
-  email: '',
-  message: '',
-};
-
-const savedState = localStorage.getItem(STORAGE_KEY);
-if (savedState) {
-  formData = JSON.parse(savedState);
-  formEl.elements.email.value = formData.email;
-  formEl.elements.message.value = formData.message;
-}
-
-formEl.addEventListener('input', event => {
-  const { name, value } = event.target;
-
-  if (name) {
-    formData[name] = value.trim();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-  }
-});
-
-formEl.addEventListener('submit', event => {
-  event.preventDefault();
-
-  const { email, message } = formData;
-
-  if (!email || !message) {
-    alert('Fill please all fields');
-    return;
-  }
-
-  console.log(formData);
-
-  localStorage.removeItem(STORAGE_KEY);
-  formEl.reset();
-  formData = { email: '', message: '' };
-});
+    <script type="module" src="./js/2-form.js"></script>
+  </body>
+</html>
